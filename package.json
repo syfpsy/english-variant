@@ -1,0 +1,28 @@
+{
+  "name": "english-variant",
+  "private": true,
+  "version": "0.1.0",
+  "description": "English Variant — train on British vs American English differences.",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "web": "npm run dev --workspace apps/web",
+    "mobile": "npm run start --workspace apps/mobile",
+    "build:shared": "npm run build --workspace packages/shared",
+    "build:content": "npm run build --workspace packages/content",
+    "build:packages": "npm run build:shared && npm run build:content",
+    "lint": "npm run lint --workspaces --if-present",
+    "typecheck": "npm run typecheck --workspaces --if-present",
+    "supabase:reset": "supabase db reset",
+    "supabase:push": "supabase db push"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "overrides": {
+    "react": "19.2.5",
+    "react-dom": "19.2.5"
+  }
+}

@@ -1,0 +1,16 @@
+node_modules
+.DS_Store
+dist
+build
+.next
+.expo
+.env
+.env.*
+!.env.example
+coverage
+*.log
+.turbo
+.supabase
+.claude/
+*.claude
+*.tsbuildinfo

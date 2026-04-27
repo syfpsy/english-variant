@@ -1,0 +1,40 @@
+{
+  "name": "@english-variant/web",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev --turbopack",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@english-variant/content": "*",
+    "@english-variant/shared": "*",
+    "@heroui-pro/react": "^1.0.0-beta.1",
+    "@heroui/react": "^3.0.3",
+    "@heroui/styles": "^3.0.3",
+    "@internationalized/date": "^3.12.1",
+    "@number-flow/react": "^0.6.0",
+    "@supabase/ssr": "^0.10.2",
+    "@supabase/supabase-js": "^2.47.10",
+    "framer-motion": "^12.0.0",
+    "next": "^15.1.4",
+    "react": "19.2.5",
+    "react-aria-components": "^1.17.0",
+    "react-dom": "19.2.5",
+    "tailwind-merge": "^3.5.0",
+    "tailwind-variants": "^3.2.2",
+    "zod": "^3.24.1"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4.2.4",
+    "@types/node": "^22.10.5",
+    "@types/react": "^19.0.7",
+    "@types/react-dom": "^19.0.3",
+    "postcss": "^8.4.49",
+    "tailwindcss": "^4.2.4",
+    "typescript": "^5.7.3"
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "expo": {
+    "name": "English Variant",
+    "slug": "english-variant",
+    "version": "0.1.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "light",
+    "scheme": "englishvariant",
+    "newArchEnabled": true,
+    "splash": {
+      "backgroundColor": "#FAF8F4",
+      "resizeMode": "contain"
+    },
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.englishvariant.app"
+    },
+    "android": {
+      "adaptiveIcon": {
+        "backgroundColor": "#FAF8F4"
+      },
+      "package": "com.englishvariant.app"
+    },
+    "plugins": [
+      "expo-router"
+    ],
+    "experiments": {
+      "typedRoutes": true
+    }
+  }
+}
