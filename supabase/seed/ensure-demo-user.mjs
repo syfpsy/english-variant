@@ -5,15 +5,20 @@
  * Usage:
  *   node supabase/seed/ensure-demo-user.mjs
  *
- * Reads SUPABASE_URL + SUPABASE_SERVICE_ROLE_KEY from env, falling back to
- * the well-known local-dev defaults so `supabase db reset && node ...` works
- * out of the box.
+ * Reads SUPABASE_URL + SUPABASE_SERVICE_ROLE_KEY from the environment.
+ * For local dev run `supabase start` and copy the service_role key it prints.
  */
 
 const url = process.env.SUPABASE_URL ?? "http://127.0.0.1:54321";
-const serviceKey =
-  process.env.SUPABASE_SERVICE_ROLE_KEY ??
-  "REDACTED_LOCAL_DEV_KEY";
+const serviceKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
+if (!serviceKey) {
+  console.error(
+    "Error: SUPABASE_SERVICE_ROLE_KEY is required.\n" +
+      "  Local dev: run `supabase start` and export the service_role key.\n" +
+      "  Production: set it from the Supabase dashboard → Settings → API.",
+  );
+  process.exit(1);
+}
 
 const DEMO_EMAIL = "demo@englishvariant.app";
 const DEMO_PASSWORD = "demo-playground-2026";
