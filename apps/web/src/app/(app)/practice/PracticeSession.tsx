@@ -27,6 +27,7 @@ export function PracticeSession({
   const [picked, setPicked] = useState<string | null>(null);
   const [revealed, setRevealed] = useState(false);
   const [correctCount, setCorrectCount] = useState(0);
+  const [savedIds, setSavedIds] = useState<Set<string>>(new Set());
 
   if (index >= session.length) {
     return (
@@ -80,6 +81,19 @@ export function PracticeSession({
       answer: value,
       expected,
     });
+  }
+
+  async function toggleSave(contentId: string) {
+    const supabase = getBrowserSupabase();
+    const { data: { user } } = await supabase.auth.getUser();
+    if (!user) return;
+    if (savedIds.has(contentId)) {
+      await supabase.from("saved_items").delete().eq("user_id", user.id).eq("content_id", contentId);
+      setSavedIds(prev => { const n = new Set(prev); n.delete(contentId); return n; });
+    } else {
+      await supabase.from("saved_items").upsert({ user_id: user.id, content_id: contentId });
+      setSavedIds(prev => new Set([...prev, contentId]));
+    }
   }
 
   function next() {
@@ -148,7 +162,22 @@ export function PracticeSession({
         </div>
       )}
 
-      <div className="mt-8 flex justify-end">
+      <div className="mt-8 flex items-center justify-between">
+        <div>
+          {"contentId" in ex && revealed && (
+            <button
+              type="button"
+              onClick={() => toggleSave(ex.contentId)}
+              className={`rounded-md px-3 py-1.5 text-sm transition ${
+                savedIds.has(ex.contentId)
+                  ? "text-accent font-medium"
+                  : "text-ink-muted hover:text-ink"
+              }`}
+            >
+              {savedIds.has(ex.contentId) ? "Saved ✓" : "Save"}
+            </button>
+          )}
+        </div>
         <Button isDisabled={!revealed} onPress={next}>
           {index + 1 === session.length ? "Finish" : "Next"}
         </Button>

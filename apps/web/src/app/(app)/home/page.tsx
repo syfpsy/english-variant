@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { getServerSupabase } from "@/lib/supabase/server";
-import { dailyPick, CONTENT_COUNT } from "@english-variant/content";
+import { dailyPick, CONTENT_COUNT, byId } from "@english-variant/content";
 import { DialectBadge } from "@/components/DialectBadge";
 
 export default async function HomePage() {
@@ -118,9 +118,17 @@ export default async function HomePage() {
         <Panel title="Saved" href="/review" hrefLabel="Open saved">
           {saved && saved.length > 0 ? (
             <ul className="space-y-2 text-sm text-ink">
-              {saved.map((s) => (
-                <li key={s.content_id}>{s.content_id}</li>
-              ))}
+              {saved.map((s) => {
+                const content = byId(s.content_id);
+                if (!content) return null;
+                return (
+                  <li key={s.content_id} className="flex items-center gap-2 text-sm text-ink">
+                    <span className="font-mono text-xs text-uk">{content.uk.term}</span>
+                    <span className="text-ink-subtle">·</span>
+                    <span className="font-mono text-xs text-us">{content.us.term}</span>
+                  </li>
+                );
+              })}
             </ul>
           ) : (
             <p className="text-sm text-ink-muted">

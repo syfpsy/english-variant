@@ -10,6 +10,7 @@ const NAV: Array<{ href: string; label: string }> = [
   { href: "/practice", label: "Practice" },
   { href: "/checker", label: "Checker" },
   { href: "/review", label: "Review" },
+  { href: "/settings", label: "Settings" },
 ];
 
 export function Shell({ children }: { children: React.ReactNode }) {
