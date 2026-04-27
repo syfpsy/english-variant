@@ -50,7 +50,7 @@ export async function chat({
       "Content-Type": "application/json",
       Authorization: `Bearer ${key}`,
       // OpenRouter uses these for attribution/rate-limit dashboards.
-      "HTTP-Referer": "https://localhost:3000",
+      "HTTP-Referer": process.env.NEXT_PUBLIC_SITE_URL ?? "https://english-variant.vercel.app",
       "X-Title": "English Variant",
     },
     body: JSON.stringify({
