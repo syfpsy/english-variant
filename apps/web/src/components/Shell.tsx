@@ -5,12 +5,13 @@ import { usePathname, useRouter } from "next/navigation";
 import { Brand } from "./Brand";
 import { getBrowserSupabase } from "@/lib/supabase/client";
 
-const NAV: Array<{ href: string; label: string }> = [
+const NAV: Array<{ href: string; label: string; mobileHide?: boolean }> = [
   { href: "/home", label: "Home" },
   { href: "/practice", label: "Practice" },
   { href: "/checker", label: "Checker" },
   { href: "/review", label: "Review" },
-  { href: "/settings", label: "Settings" },
+  { href: "/browse", label: "Browse", mobileHide: true },
+  { href: "/settings", label: "Settings", mobileHide: true },
 ];
 
 export function Shell({ children }: { children: React.ReactNode }) {
@@ -53,7 +54,7 @@ export function Shell({ children }: { children: React.ReactNode }) {
       </header>
       <main className="mt-10 flex-1">{children}</main>
       <nav className="mt-8 flex justify-around border-t border-border/70 pt-3 md:hidden">
-        {NAV.map((n) => (
+        {NAV.filter((n) => !n.mobileHide).map((n) => (
           <Link
             key={n.href}
             href={n.href as never}
